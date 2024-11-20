@@ -113,6 +113,7 @@ class Food {
 
 int main() {
     initscr();
+    curs_set(0);
     noecho();
     nodelay(stdscr, TRUE);
     cbreak();
