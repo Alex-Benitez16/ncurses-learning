@@ -98,7 +98,7 @@ class Food {
             gen.seed(rd());
             std::uniform_int_distribution<> intDist(min, max);
             x = intDist(gen);
-            if(x % 2 == 1) x++;
+            if(x % 2 == 1) x--;
             y = intDist(gen);
             mvaddch(y, x ,character);
         }
@@ -126,7 +126,9 @@ int main() {
     const int MOVE_DELAY = 100;
     auto last_move = std::chrono::steady_clock::now();
 
-    Food apple('O', 10, 60);
+    int terminal_y = getmaxy(stdscr);
+
+    Food apple('O', 10, terminal_y - 10);
 
     while(true) {
         input = getch();
@@ -156,19 +158,19 @@ int main() {
                 switch(direction) {
                 case KEY_UP:
                     my_snake.add_up();
-                    apple.place(10, 60);
+                    apple.place(10, terminal_y - 10);
                     break;
                 case KEY_DOWN:
                     my_snake.add_down();
-                    apple.place(10, 60);
+                    apple.place(10, terminal_y - 10);
                     break;
                 case KEY_RIGHT:
                     my_snake.add_right();
-                    apple.place(10, 60);
+                    apple.place(10, terminal_y - 10);
                     break;
                 case KEY_LEFT:
                     my_snake.add_left();
-                    apple.place(10, 60);
+                    apple.place(10, terminal_y - 10);
                     break; 
                 }
             }
